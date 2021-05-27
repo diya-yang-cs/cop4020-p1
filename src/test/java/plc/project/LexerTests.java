@@ -14,7 +14,7 @@ public class LexerTests {
 
     @ParameterizedTest
     @MethodSource
-    void testIdentifier(String test, String input, boolean success) {
+    public void testIdentifier(String test, String input, boolean success) {
         test(input, Token.Type.IDENTIFIER, success);
     }
 

@@ -32,7 +32,7 @@ public class RegexTests {
      */
     @ParameterizedTest
     @MethodSource
-    public void testEmailRegex(String test, String input, boolean success) {
+    void testEmailRegex(String test, String input, boolean success) {
         test(input, Regex.EMAIL, success);
     }
 
