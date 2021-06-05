@@ -22,7 +22,9 @@ public class LexerTests {
         return Stream.of(
                 Arguments.of("Alphabetic", "getName", true),
                 Arguments.of("Alphanumeric", "thelegend27", true),
-                Arguments.of("Leading Hyphen", "-five", false),
+                Arguments.of("Leading Hyphen", ".five", false),
+                Arguments.of("Leading Hyphen", "+five", false),
+                Arguments.of("Leading Hyphen", "!five", false),
                 Arguments.of("Leading Digit", "1fish2fish3fishbluefish", false)
         );
     }
@@ -54,8 +56,8 @@ public class LexerTests {
                 Arguments.of("Integer", "1", false),
                 Arguments.of("Multiple Digits", "123.456", true),
                 Arguments.of("Negative Decimal", "-1.0", true),
-                Arguments.of("Trailing Decimal", "1.", false),
-                Arguments.of("Leading Decimal", ".5", false)
+                Arguments.of("Trailing Decimal", "1.2.3.4.5.6.7", false),
+                Arguments.of("Leading Decimal", "a.b.b", false)
         );
     }
 
@@ -83,6 +85,7 @@ public class LexerTests {
     private static Stream<Arguments> testString() {
         return Stream.of(
                 Arguments.of("Empty", "\"\"", true),
+                Arguments.of("Empty", "\"\\b\"", true),
                 Arguments.of("Alphabetic", "\"abc\"", true),
                 Arguments.of("Newline Escape", "\"Hello,\\nWorld\"", true),
                 Arguments.of("Unterminated", "\"unterminated", false),
@@ -100,6 +103,7 @@ public class LexerTests {
     private static Stream<Arguments> testOperator() {
         return Stream.of(
                 Arguments.of("Character", "(", true),
+                //Arguments.of("Character1", "+", true),
                 Arguments.of("Comparison", "<=", true),
                 Arguments.of("Space", " ", false),
                 Arguments.of("Tab", "\t", false)
